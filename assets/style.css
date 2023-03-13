@@ -28,7 +28,7 @@
       .jumbotron {
         height: 20%;
         width: 100%;
-        background: linear-gradient(to left, #20084a, #3463bc);
+        background: linear-gradient(to right, purple , blue );
         /* background-color: var(--bg-jumbo); */
         color: var(--font-jumbo);
       }
@@ -102,7 +102,7 @@
     .search-button {
       /* text-align: inherit; */
       margin: 0.5rem;
-      width: 10%;
+      /* width: 17%; */
       background-color: #5098e6;
       color: #d9e9e8;
     }
@@ -166,7 +166,7 @@
       background-color: var(--primary);
       color: var(--tertiary);
       min-height: 150px;
-      max-height: 150px;
+      /* max-height: 150px; */
       flex-basis: calc(50% - 1em);
       display: flex;
       align-items: flex-end;
