@@ -56,12 +56,48 @@ var handleFormSubmit = function (event) {
 
 formEl.on('submit', handleFormSubmit);
 
+// 2 Fetch function
 
+// function fetchWeather(location) {
+//   var { lat } = location;
+//   var { lon } = location;
+//   var city = location.name;
 
+//   var apiUrl = `${weatherApiRootUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
 
+//   fetch(apiUrl)
+//     .then(function (res) {
+//       return res.json();
+//     })
+//     .then(function (data) {
+//       renderItems(city, data);
+//     })
+//     .catch(function (err) {
+//       console.error(err);
+//     });
+// }
 
+// search => name
 
-// 
+function fetchCoords(name) {
+  var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${name}&limit=5&appid=${weatherApiKey}`;
+
+  fetch(apiUrl)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      if (!data[0]) {
+        alert('Location not found');
+      } else {
+        appendToHistory(name);
+        fetchWeather(data[0]);
+      }
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
 
 // 3. What is the current time in the format: hours:minutes:seconds
 var time = dayjs().format('hh:mm:ss');
