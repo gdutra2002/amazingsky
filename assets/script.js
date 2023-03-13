@@ -1,10 +1,19 @@
+
+
+// API info
+// Name:
+// Default
+// Key:
+// 3fade8c75faf1243c424955cb9eafdfa
+
+
 var formEl = $('#currentCity');
 var nameInputEl = $('#name-input');
 var commentInputEl = $('#comment-input');
 
-var guestBookDisplayEl = $('#locationDisplay');
+var locationDisplayEl = $('#locationDisplay');
 
-var printGuestData = function (name, comment) {
+var printQueryData = function (name, comment) {
   var cardColumnEl = $('<div>');
   cardColumnEl.addClass('col-12 col-sm-4 col-md-3');
 
@@ -24,7 +33,7 @@ var printGuestData = function (name, comment) {
   var cardComment = $('<p>').addClass('card-text').text(comment);
   cardComment.appendTo(cardBodyEl);
 
-  guestBookDisplayEl.append(cardColumnEl);
+  locationDisplayEl.append(cardColumnEl);
 };
 
 var handleFormSubmit = function (event) {
@@ -38,7 +47,7 @@ var handleFormSubmit = function (event) {
     return;
   }
 
-  printGuestData(nameInput, commentInput);
+  printQueryData(nameInput, commentInput);
 
   // reset form
   nameInputEl.val('');
