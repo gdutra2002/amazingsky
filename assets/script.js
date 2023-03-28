@@ -56,31 +56,31 @@ var handleFormSubmit = function (event) {
 
 formEl.on('submit', handleFormSubmit);
 
-// 2 Fetch function
+function fetchWeather(location) {
+  console.log("I'm inside function fetchWeather");
+  var { lat } = location;
+  var { lon } = location;
+  var city = location.name;
 
-// function fetchWeather(location) {
-//   var { lat } = location;
-//   var { lon } = location;
-//   var city = location.name;
+  var apiUrl = `${api.openweathermap.org}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${3fade8c75faf1243c424955cb9eafdfa}`;
+    
+  fetch(apiUrl)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      renderItems(city, data);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
 
-//   var apiUrl = `${weatherApiRootUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
-
-//   fetch(apiUrl)
-//     .then(function (res) {
-//       return res.json();
-//     })
-//     .then(function (data) {
-//       renderItems(city, data);
-//     })
-//     .catch(function (err) {
-//       console.error(err);
-//     });
-// }
-
-// search => name
+search => name
 
 function fetchCoords(name) {
-  var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${name}&limit=5&appid=${weatherApiKey}`;
+  var apiUrl = `${api.openweathermap.org}/geo/1.0/direct?q=${name}&limit=5&appid=${3fade8c75faf1243c424955cb9eafdfa}`;
 
   fetch(apiUrl)
     .then(function (res) {
