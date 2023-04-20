@@ -42,10 +42,12 @@ var handleFormSubmit = function (event) {
   var nameInput = nameInputEl.val();
   var commentInput = commentInputEl.val();
 
-  if (!nameInput || !commentInput) {
-    console.log('Where are you plannning going to?');
-    return;
-  }
+  // if (!nameInput || !commentInput) {
+  //   console.log('Where are you plannning going to?');
+  //   return;
+  // }
+
+  fetchCoords(nameInput);
 
   printQueryData(nameInput, commentInput);
 
@@ -62,7 +64,7 @@ function fetchWeather(location) {
   var { lon } = location;
   var city = location.name;
 
-  var apiUrl = `${api.openweathermap.org}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${3fade8c75faf1243c424955cb9eafdfa}`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=3fade8c75faf1243c424955cb9eafdfa`;
     
   fetch(apiUrl)
     .then(function (res) {
@@ -70,7 +72,7 @@ function fetchWeather(location) {
     })
     .then(function (data) {
       console.log(data);
-      renderItems(city, data);
+      // renderItems(city, data);
     })
     .catch(function (err) {
       console.error(err);
@@ -80,7 +82,7 @@ function fetchWeather(location) {
 search => name
 
 function fetchCoords(name) {
-  var apiUrl = `${api.openweathermap.org}/geo/1.0/direct?q=${name}&limit=5&appid=${3fade8c75faf1243c424955cb9eafdfa}`;
+  var apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${name},USA&limit=5&appid=3fade8c75faf1243c424955cb9eafdfa`;
 
   fetch(apiUrl)
     .then(function (res) {
@@ -90,7 +92,7 @@ function fetchCoords(name) {
       if (!data[0]) {
         alert('Location not found');
       } else {
-        appendToHistory(name);
+        // appendToHistory(name);
         fetchWeather(data[0]);
       }
     })
