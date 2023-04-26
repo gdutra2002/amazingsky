@@ -14,10 +14,10 @@ var commentInputEl = $('#comment-input');
 var locationDisplayEl = $('#locationDisplay');
 
 //weather data
-
+///////
 function renderCurrentWeather(city, weather) {
   var date = dayjs().format('M/D/YYYY');
-  // Store response data from our fetch request in variables
+  // Store response data from our fetch request in variables//////
   var tempF = weather.main.temp;
   var windMph = weather.wind.speed;
   var humidity = weather.main.humidity;
@@ -59,7 +59,73 @@ function renderCurrentWeather(city, weather) {
 
 
 
+// Function to display a forecast card given an object from open weather api
+// daily forecast.
+function renderForecastCard(forecast) {
+  // variables for data from api
+  var iconUrl = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
+  var iconDescription = forecast.weather[0].description;
+  var tempF = forecast.main.temp;
+  var humidity = forecast.main.humidity;
+  var windMph = forecast.wind.speed;
+
+  // Create elements for a card
+  var col = document.createElement('div');
+  var card = document.createElement('div');
+  var cardBody = document.createElement('div');
+  var cardTitle = document.createElement('h5');
+  var weatherIcon = document.createElement('img');
+  var tempEl = document.createElement('p');
+  var windEl = document.createElement('p');
+  var humidityEl = document.createElement('p');
+
+  col.append(card);
+  card.append(cardBody);
+  cardBody.append(cardTitle, weatherIcon, tempEl, windEl, humidityEl);
+
+  col.setAttribute('class', 'col-md');
+  col.classList.add('five-day-card');
+  card.setAttribute('class', 'card bg-primary h-100 text-white');
+  cardBody.setAttribute('class', 'card-body p-2');
+  cardTitle.setAttribute('class', 'card-title');
+  tempEl.setAttribute('class', 'card-text');
+  windEl.setAttribute('class', 'card-text');
+  humidityEl.setAttribute('class', 'card-text');
+
+  // Add content to elements
+  cardTitle.textContent = dayjs(forecast.dt_txt).format('M/D/YYYY');
+  weatherIcon.setAttribute('src', iconUrl);
+  weatherIcon.setAttribute('alt', iconDescription);
+  tempEl.textContent = `Temp: ${tempF} °F`;
+  windEl.textContent = `Wind: ${windMph} MPH`;
+  humidityEl.textContent = `Humidity: ${humidity} %`;
+
+  forecastContainer.append(col);
+}
+
+
+
 // hx below
+///////////
+
+// Function to display the search history list.
+function renderSearchHistory() {
+  searchHistoryContainer.innerHTML = '';
+
+  // Start at end of history array and count down to show the most recent at the top.
+  for (var i = searchHistory.length - 1; i >= 0; i--) {
+    var btn = document.createElement('button');
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('aria-controls', 'today forecast');
+    btn.classList.add('history-btn', 'btn-history');
+
+    // `data-search` allows access to city name when click handler is invoked
+    btn.setAttribute('data-search', searchHistory[i]);
+    btn.textContent = searchHistory[i];
+    searchHistoryContainer.append(btn);
+  }
+}
+
 
 var printQueryData = function (name, comment) {
   var cardColumnEl = $('<div>');
@@ -84,6 +150,27 @@ var printQueryData = function (name, comment) {
   locationDisplayEl.append(cardColumnEl);
 };
 
+// Function to update history in local storage then updates displayed history.
+function appendToHistory(name) {
+  // If there is no search term return the function
+  if (searchHistory.indexOf(name) !== -1) {
+    return;
+  }
+  searchHistory.push(name);
+
+  localStorage.setItem('search-history', JSON.stringify(nameHistory));
+  renderSearchHistory();
+}
+
+// Function to get search history from local storage
+function initNameHistory() {
+  var storedHistory = localStorage.getItem('name-history');
+  if (storedHistory) {
+    nameHistory = JSON.parse(storedHistory);
+  }
+  renderNameHistory();
+}
+
 var handleFormSubmit = function (event) {
   event.preventDefault();
 
@@ -103,6 +190,11 @@ var handleFormSubmit = function (event) {
   nameInputEl.val('');
   commentInputEl.val('');
 };
+
+
+
+
+
 
 formEl.on('submit', handleFormSubmit);
 
