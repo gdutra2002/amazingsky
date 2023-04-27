@@ -10,7 +10,9 @@
 var formEl = $('#currentCity');
 var nameInputEl = $('#name-input');
 var commentInputEl = $('#comment-input');
-
+var todayContainer = document.querySelector('#today');
+var forecastContainer = document.querySelector('#forecast');
+var searchHistoryContainer = document.querySelector('#history');
 var locationDisplayEl = $('#locationDisplay');
 
 //weather data
