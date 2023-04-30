@@ -5,7 +5,6 @@
 // 3fade8c75faf1243c424955cb9eafdfa
 
 
-
 var formEl = $('#currentCity');
 var nameInputEl = $('#name-input');
 var commentInputEl = $('#comment-input');
