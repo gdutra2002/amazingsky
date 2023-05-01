@@ -21,7 +21,9 @@ https://gdutra2002.github.io/amazingsky/
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
 
-![alt text](assets/images/screenshot.png)
+![AmazingSky](assets/images/as1.png)
+![AmazingSky](assets/images/as2.png)
+![AmazingSky](assets/images/as3.png)
 
 ## Credits
 
