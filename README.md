@@ -1,24 +1,21 @@
-# amazingsky
+# AmazingSky
 
 ## Description
 
 Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
 
-To create a weather app.....
+To create a weather app which provides a clear interface for users to search and view current conditions in the city of their selection.  The app displays current, as well as a 5 day forecast of temperature, humidity, and wind speed for the city selected.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+The Amazing Sky weather app can be used on any browser or device connected to the internet for a simple stand alone application. 
+
+It utilizes the day.js and OpenWeatherMap API for data based on user search criteria.
 
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Simply open the index.html of AmazingSky on any connected browser or device.  Select a City to search in the dialoge box, click the search button.  Your results will be displayed below, including a clickable search history.
 
 ## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
 
@@ -26,7 +23,8 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+https://openweathermap.org
+https://day.js.org/
 
 G.D.
 UCD
