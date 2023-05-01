@@ -4,7 +4,6 @@
 // Key:
 // 3fade8c75faf1243c424955cb9eafdfa
 
-
 var formEl = $('#currentCity');
 var nameInputEl = $('#name-input');
 var commentInputEl = $('#comment-input');
@@ -62,7 +61,7 @@ function initSearchHistory() {
 }
 
 
-var printQueryData = function (name, comment) {
+var printQueryData = function (city, comment) {
   var cardColumnEl = $('<div>');
   cardColumnEl.addClass('col-12 col-sm-4 col-md-3');
 
@@ -72,7 +71,7 @@ var printQueryData = function (name, comment) {
   cardEl.appendTo(cardColumnEl);
 
   // Add a class of .custom-card-header
-  var cardName = $('<h5>').addClass('card-header custom-card-header').text(name);
+  var cardName = $('<h5>').addClass('card-header custom-card-header').text(city);
   cardName.appendTo(cardEl);
 
   var cardBodyEl = $('<div>');
@@ -225,7 +224,7 @@ var handleFormSubmit = function (event) {
 
 
 
-formEl.on('submit', handleFormSubmit);
+// cityForm.on('submit', handleFormSubmit);
 
 
 function renderItems(city, data) {
@@ -239,7 +238,7 @@ function fetchWeather(location) {
   console.log("I'm inside function fetchWeather");
   var { lat } = location;
   var { lon } = location;
-  var city = location.name;
+  var city = location.city;
 
   var apiUrl = `${weatherApiRootUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
 //   var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=3fade8c75faf1243c424955cb9eafdfa`;
@@ -258,7 +257,7 @@ function fetchWeather(location) {
 
 function fetchCoords(search) {
   var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${weatherApiKey}`;
-//   var apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${name},USA&limit=5&appid=3fade8c75faf1243c424955cb9eafdfa`;
+//   var apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},USA&limit=5&appid=3fade8c75faf1243c424955cb9eafdfa`;
 
   fetch(apiUrl)
     .then(function (res) {
