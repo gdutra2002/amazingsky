@@ -15,6 +15,8 @@ It utilizes the day.js and OpenWeatherMap API for data based on user search crit
 
 Simply open the index.html of AmazingSky on any connected browser or device.  Select a City to search in the dialoge box, click the search button.  Your results will be displayed below, including a clickable search history.
 
+https://gdutra2002.github.io/amazingsky/
+
 ## Usage
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
