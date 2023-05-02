@@ -58,8 +58,8 @@ function renderCurrentWeather(city, weather) {
   var windEl = document.createElement('p');
   var humidityEl = document.createElement('p');
 
-  card.setAttribute('class', 'card h-100 custom-card');
-  cardBody.setAttribute('class', 'card-body');
+  card.setAttribute('class', 'card');
+  cardBody.setAttribute('class', 'card h-100 custom-card');
   card.append(cardBody);
 
   heading.setAttribute('class', 'h3 card-title');
@@ -243,6 +243,11 @@ function handleSearchHistoryClick(e) {
   fetchCoords(search);
 }
 
+
+// document.getElementById("stock").addEventListener("click", function(){
+//   document.getElementById("myInput").value = this.value;
+// });
+
 // Function to display the search history list.
 function renderSearchHistory() {
   searchHistoryContainer.innerHTML = '';
@@ -273,7 +278,7 @@ function appendToHistory(search) {
   renderSearchHistory();
 }
 
-// Function to get search history from local storage
+// Function to get search history from local storage.
 function initSearchHistory() {
   var storedHistory = localStorage.getItem('search-history');
   if (storedHistory) {
@@ -290,6 +295,6 @@ searchHistoryContainer.addEventListener('click', handleSearchHistoryClick);
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-// 3. What is the current time in the format: hours:minutes:seconds
+// What is the current time in the format: hours:minutes:seconds
 var time = dayjs().format('hh:mm:ss');
 $('#3a').text(time);
