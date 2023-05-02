@@ -4,6 +4,7 @@
 // Key:
 // 3fade8c75faf1243c424955cb9eafdfa
 
+// Initial conditions found in index.html document.
 var formEl = $('#currentCity');
 var nameInputEl = $('#name-input');
 var commentInputEl = $('#comment-input');
@@ -17,16 +18,15 @@ var todayContainer = document.querySelector('#today');
 var forecastContainer = document.querySelector('#forecast');
 var searchHistoryContainer = document.querySelector('#history');
 
+// First input box, superfluous comment to be repurposed or discarded.
 var printQueryData = function (name, comment) {
   var cardColumnEl = $('<div>');
   cardColumnEl.addClass('col-12 col-sm-4 col-md-3');
 
   var cardEl = $('<div>');
-  // Add a class of .custom-card
   cardEl.addClass('card h-100 custom-card');
   cardEl.appendTo(cardColumnEl);
 
-  // Add a class of .custom-card-header
   var cardName = $('<h5>').addClass('card-header custom-card-header').text(name);
   cardName.appendTo(cardEl);
 
@@ -40,10 +40,10 @@ var printQueryData = function (name, comment) {
   locationDisplayEl.append(cardColumnEl);
 };
 
-// Function to display the current weather data fetched from OpenWeather api.
+// Display the current weather data fetched from OpenWeather api.
 function renderCurrentWeather(city, weather) {
   var date = dayjs().format('M/D/YYYY');
-  // Store response data from our fetch request in variables
+// Response data from fetch request in variables.
   var tempF = weather.main.temp;
   var windMph = weather.wind.speed;
   var humidity = weather.main.humidity;
@@ -70,7 +70,7 @@ function renderCurrentWeather(city, weather) {
   heading.textContent = `${city} (${date})`;
   weatherIcon.setAttribute('src', iconUrl);
   weatherIcon.setAttribute('alt', iconDescription);
-  weatherIcon.setAttribute('class', 'weather-img');
+  weatherIcon.setAttribute('class', 'img');
   heading.append(weatherIcon);
   tempEl.textContent = `Temp: ${tempF}°F`;
   windEl.textContent = `Wind: ${windMph} MPH`;
@@ -81,17 +81,14 @@ function renderCurrentWeather(city, weather) {
   todayContainer.append(card);
 }
 
-// Function to display a forecast card given an object from open weather api
-// daily forecast.
+// Display forecast cards given data from open weather api.
 function renderForecastCard(forecast) {
-  // variables for data from api
   var iconUrl = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
   var iconDescription = forecast.weather[0].description;
   var tempF = forecast.main.temp;
   var humidity = forecast.main.humidity;
   var windMph = forecast.wind.speed;
 
-  // Create elements for a card
   var col = document.createElement('div');
   var card = document.createElement('div');
   var cardBody = document.createElement('div');
@@ -114,7 +111,6 @@ function renderForecastCard(forecast) {
   windEl.setAttribute('class', 'card-text');
   humidityEl.setAttribute('class', 'card-text');
 
-  // Add content to elements
   cardTitle.textContent = dayjs(forecast.dt_txt).format('M/D/YYYY');
   weatherIcon.setAttribute('src', iconUrl);
   weatherIcon.setAttribute('alt', iconDescription);
@@ -125,9 +121,9 @@ function renderForecastCard(forecast) {
   forecastContainer.append(col);
 }
 
-// Function to display 5 day forecast.
+// Function to display the 5 day forecasts.
 function renderForecast(dailyForecast) {
-  // Create unix timestamps for start and end of 5 day forecast
+// Unix timestamps for start and end of the 5 day forecast.
   var startDt = dayjs().add(1, 'day').startOf('day').unix();
   var endDt = dayjs().add(6, 'day').startOf('day').unix();
 
@@ -143,10 +139,10 @@ function renderForecast(dailyForecast) {
 
   for (var i = 0; i < dailyForecast.length; i++) {
 
-    // First filters through all of the data and returns only data that falls between one day after the current data and up to 5 days later.
+// Filters through the data, and returns only data that falls between one day after the current data, and up to 5 days later.
     if (dailyForecast[i].dt >= startDt && dailyForecast[i].dt < endDt) {
 
-      // Then filters through the data and returns only data captured at noon for each day.
+      // Filters and returns only data captured at noon for each day.
       if (dailyForecast[i].dt_txt.slice(11, 13) == "12") {
         renderForecastCard(dailyForecast[i]);
       }
@@ -159,17 +155,16 @@ var handleFormSubmit = function (event) {
 
   var nameInput = nameInputEl.val();
   var commentInput = commentInputEl.val();
-
-  // if (!nameInput || !commentInput) {
-  //   console.log('Where are you plannning going to?');
-  //   return;
-  // }
+// if (!nameInput || !commentInput) {
+//   console.log('alt input, what other criteria to search for?');
+//   return;
+// }
 
   fetchCoords(nameInput);
 
   printQueryData(nameInput, commentInput);
 
-  // reset form
+// reset form
   nameInputEl.val('');
   commentInputEl.val('');
 };
@@ -226,7 +221,7 @@ function fetchCoords(search) {
 }
 
 function handleSearchFormSubmit(e) {
-  // Don't continue if there is nothing in the search form
+// Don't continue if there is nothing in the search form
   if (!searchInput.value) {
     return;
   }
@@ -238,7 +233,7 @@ function handleSearchFormSubmit(e) {
 }
 
 function handleSearchHistoryClick(e) {
-  // Don't do search if current elements is not a search history button
+// Don't do search if current elements is not a search history button
   if (!e.target.matches('.btn-history')) {
     return;
   }
@@ -252,14 +247,14 @@ function handleSearchHistoryClick(e) {
 function renderSearchHistory() {
   searchHistoryContainer.innerHTML = '';
 
-  // Start at end of history array and count down to show the most recent at the top.
+// Start at end of history array and count down to show the most recent at the top.
   for (var i = searchHistory.length - 1; i >= 0; i--) {
     var btn = document.createElement('button');
     btn.setAttribute('type', 'button');
     btn.setAttribute('aria-controls', 'today forecast');
     btn.classList.add('history-btn', 'btn-history');
 
-    // `data-search` allows access to city name when click handler is invoked
+// `data-search` allows access to city name when click handler is invoked
     btn.setAttribute('data-search', searchHistory[i]);
     btn.textContent = searchHistory[i];
     searchHistoryContainer.append(btn);
@@ -268,7 +263,7 @@ function renderSearchHistory() {
 
 // Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
-  // If there is no search term return the function
+// If there is no search term return the function
   if (searchHistory.indexOf(search) !== -1) {
     return;
   }
