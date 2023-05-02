@@ -58,7 +58,7 @@ function renderCurrentWeather(city, weather) {
   var windEl = document.createElement('p');
   var humidityEl = document.createElement('p');
 
-  card.setAttribute('class', 'card');
+  card.setAttribute('class', 'card h-100 custom-card');
   cardBody.setAttribute('class', 'card-body');
   card.append(cardBody);
 
