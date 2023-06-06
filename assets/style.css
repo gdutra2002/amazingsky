@@ -6,217 +6,217 @@
       --light: #fffaf7;
     } */
 
-    :root {
-      --font-body:purple;
-      --font-jumbo: white;
-      --bg-jumbo:rgb(106, 128, 153);
-      --bg-body: rgb(181, 202, 209);
-      --font-answer: blue;
-      }
-      
-      body {
-        background-color: var(--bg-body);
-        color: black;
-        font-size: 25px;
-      }
-      
-      h1 {
-        font-size: 2.25rem;
-      }
-      
-      h2 {
-        font-size: 2rem;
-      }
-      
-      h3 {
-        font-size: 1.75rem;
-      }
-      
-      h4 {
-        font-size: 1.5rem;
-      }
-      
-      h5 {
-        font-size: 1.25rem;
-      }
-      
-      h6 {
-        font-size: 1rem;
-      }
-      
-      p {
-        font-size: 1.1rem;
-        margin: 0 0 1rem;
-        line-height: 1.5;
-      }
-      
-      section {
-        padding: 5rem;
-      }
-      
-      .jumbotron {
-        height: 20%;
-        width: 100%;
-        background: linear-gradient(to right, purple , blue );
-        /* background-color: var(--bg-jumbo); */
-        color: var(--font-jumbo);
-      }
-      
-      .title {
-        font-family: 'Varela Round', sans-serif;
-      }
-      
-      .answer {
-        font-family: 'Varela Round', sans-serif;
-        margin-left: 2%;
-        color: var(--font-answer);
-      }
-    
-    ::selection {
-      color: var(--brown);
-      background-color: var(--light);
-    }
-    
-    .custom-navbar {
-      background-color: var(--teal);
-    }
-    
-    .custom-navbar a {
-      font-size: 1.5rem;
-      color: var(--lightteal);
-    }
-    
-    .custom-navbar a:hover {
-      color: var(--light);
-    }
-    
-    .hero {
-      background-color: var(--lightteal);
-      color: var(--teal);
-    }
+:root {
+  --font-body: purple;
+  --font-jumbo: white;
+  --bg-jumbo: rgb(106, 128, 153);
+  --bg-body: rgb(181, 202, 209);
+  --font-answer: blue;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: black;
+  font-size: 25px;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+section {
+  padding: 5rem;
+}
+
+.jumbotron {
+  height: 20%;
+  width: 100%;
+  background: linear-gradient(to right, purple, blue);
+  /* background-color: var(--bg-jumbo); */
+  color: var(--font-jumbo);
+}
+
+.title {
+  font-family: "Varela Round", sans-serif;
+}
+
+.answer {
+  font-family: "Varela Round", sans-serif;
+  margin-left: 2%;
+  color: var(--font-answer);
+}
+
+::selection {
+  color: var(--brown);
+  background-color: var(--light);
+}
+
+.custom-navbar {
+  background-color: var(--teal);
+}
+
+.custom-navbar a {
+  font-size: 1.5rem;
+  color: var(--lightteal);
+}
+
+.custom-navbar a:hover {
+  color: var(--light);
+}
+
+.hero {
+  background-color: var(--lightteal);
+  color: var(--teal);
+}
 
 .hero-banner {
-      background: rgb(68, 88, 120);
-      background-image: url("../images/02-hero-bg.jpg"), linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
-      background-size: cover;
-      background-position: center;
-      background-blend-mode: soft-light;
-      min-height: 30vh;
-      color: var(--light);
-      padding: 2% 6%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      text-align: right;
-    }
-    
-    .hero-banner div {
-      flex: 0 0 90%;
-    }
-    
-    .hero-banner h2 {
-      background-color: var(--secondary);
-      color: var(--tertiary);
-      margin: 0;
-      padding: 5px 10px;
-      font-size: 2.3rem;
-      line-height: 1.2;
-      display: inline;
-    }
+  background: rgb(68, 88, 120);
+  background-image: url("../images/02-hero-bg.jpg"),
+    linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: soft-light;
+  min-height: 30vh;
+  color: var(--light);
+  padding: 2% 6%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: right;
+}
 
-    .search-button {
-      /* text-align: inherit; */
-      margin: 0.5rem;
-      /* width: 17%; */
-      background-color: #5098e6;
-      color: #d9e9e8;
-    }
+.hero-banner div {
+  flex: 0 0 90%;
+}
 
-    .custom-btn {
-      background-color: var(--brown);
-      color: var(--light);
-    }
-    
-    .custom-btn:hover {
-      background-color: var(--tan);
-      color: var(--brown);
-    }
-    
-    .custom-card {
-      border-color: var(--teal);
-      color: var(--brown);
-    }
-    
-    .custom-card-header {
-      background-color: var(--teal);
-      /* background: linear-gradient(to left, #20084a, #3463bc); */
-      color: var(--lightteal);
-    }
-    
-    .page-section {
-      margin: 25px 0;
-      padding: 10px 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: stretch;
-      justify-content: space-between;
-    }
-    
-    .page-section > h2 {
-      flex: 0 0 20%;
-      text-align: right;
-      padding-right: 15px;
-      border-right: 4px solid var(--primary);
-      font-size: 4vw;
-      line-height: 1.1;
-    }
-    
-    .page-section > div {
-      flex: 0 0 77%;
-    }
-    
-    .page-section p {
-      margin-bottom: 20px;
-    }
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .flex-item {
-      border: 5px solid var(--secondary);
-      background-color: var(--primary);
-      color: var(--tertiary);
-      min-height: 150px;
-      /* max-height: 150px; */
-      flex-basis: calc(50% - 1em);
-      display: flex;
-      align-items: flex-end;
-      padding: 0 0 20px 0;
-      margin: 0.5em;
-      text-decoration: none;
-      background-blend-mode: soft-light;
-      background-size: 150%;
-      transition: all 0.5s;
-      font-size: 0.9rem;
-    }
-    
-    .flex-item:first-child {
-        min-height: 400px;
-        flex-basis: 100%;
-    }
-    
-    .flex-item:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-    
-    .flex-item div {
-      background-color: var(--secondary);
-      padding: 8px 10px;
-    }
-    
-    .flex-item h3 {
-      font-size: 1.6rem;
-    }
-    
+.hero-banner h2 {
+  background-color: var(--secondary);
+  color: var(--tertiary);
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 2.3rem;
+  line-height: 1.2;
+  display: inline;
+}
+
+.search-button {
+  /* text-align: inherit; */
+  margin: 0.5rem;
+  /* width: 17%; */
+  background-color: #5098e6;
+  color: #d9e9e8;
+}
+
+.custom-btn {
+  background-color: var(--brown);
+  color: var(--light);
+}
+
+.custom-btn:hover {
+  background-color: var(--tan);
+  color: var(--brown);
+}
+
+.custom-card {
+  border-color: var(--teal);
+  color: var(--brown);
+}
+
+.custom-card-header {
+  background-color: var(--teal);
+  /* background: linear-gradient(to left, #20084a, #3463bc); */
+  color: var(--lightteal);
+}
+
+.page-section {
+  margin: 25px 0;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.page-section > h2 {
+  flex: 0 0 20%;
+  text-align: right;
+  padding-right: 15px;
+  border-right: 4px solid var(--primary);
+  font-size: 4vw;
+  line-height: 1.1;
+}
+
+.page-section > div {
+  flex: 0 0 77%;
+}
+
+.page-section p {
+  margin-bottom: 20px;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.flex-item {
+  border: 5px solid var(--secondary);
+  background-color: var(--primary);
+  color: var(--tertiary);
+  min-height: 150px;
+  /* max-height: 150px; */
+  flex-basis: calc(50% - 1em);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 20px 0;
+  margin: 0.5em;
+  text-decoration: none;
+  background-blend-mode: soft-light;
+  background-size: 150%;
+  transition: all 0.5s;
+  font-size: 0.9rem;
+}
+
+.flex-item:first-child {
+  min-height: 400px;
+  flex-basis: 100%;
+}
+
+.flex-item:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.flex-item div {
+  background-color: var(--secondary);
+  padding: 8px 10px;
+}
+
+.flex-item h3 {
+  font-size: 1.6rem;
+}
