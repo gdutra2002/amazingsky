@@ -34,7 +34,6 @@ function printQueryData(name, comment) {
 
   var cardComment = $("<p>").addClass("card-text").text(comment);
   cardComment.appendTo(cardBodyEl);
-
   locationDisplayEl.append(cardColumnEl);
 }
 
@@ -42,38 +41,35 @@ function printQueryData(name, comment) {
 function renderCurrentWeather(city, weather) {
   var date = dayjs().format("M/D/YYYY");
   var tempF = weather.main.temp;
-  var windMph = weather.wind.speed;
   var humidity = weather.main.humidity;
+  var windMph = weather.wind.speed;
   var iconUrl = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
   var iconDescription = weather.weather[0].description || weather[0].main;
-
   var card = document.createElement("div");
   var cardBody = document.createElement("div");
   var heading = document.createElement("h2");
   var weatherIcon = document.createElement("img");
   var tempEl = document.createElement("p");
-  var windEl = document.createElement("p");
   var humidityEl = document.createElement("p");
+  var windEl = document.createElement("p");
+  
 
   card.setAttribute("class", "card");
   cardBody.setAttribute("class", "card h-100 custom-card");
   card.append(cardBody);
-
   heading.setAttribute("class", "h3 card-title");
   tempEl.setAttribute("class", "card-text");
-  windEl.setAttribute("class", "card-text");
   humidityEl.setAttribute("class", "card-text");
-
+  windEl.setAttribute("class", "card-text");
   heading.textContent = `${city} (${date})`;
   weatherIcon.setAttribute("src", iconUrl);
   weatherIcon.setAttribute("alt", iconDescription);
   weatherIcon.setAttribute("class", "img");
   heading.append(weatherIcon);
+  humidityEl.textContent = `Humidity: ${humidity} %`;
   tempEl.textContent = `Temp: ${tempF}°F`;
   windEl.textContent = `Wind: ${windMph} MPH`;
-  humidityEl.textContent = `Humidity: ${humidity} %`;
   cardBody.append(heading, tempEl, windEl, humidityEl);
-
   todayContainer.innerHTML = "";
   todayContainer.append(card);
 }
@@ -85,40 +81,37 @@ function renderForecastCard(forecast) {
   var tempF = forecast.main.temp;
   var humidity = forecast.main.humidity;
   var windMph = forecast.wind.speed;
-
   var col = document.createElement("div");
   var card = document.createElement("div");
   var cardBody = document.createElement("div");
   var cardTitle = document.createElement("h5");
   var weatherIcon = document.createElement("img");
   var tempEl = document.createElement("p");
-  var windEl = document.createElement("p");
   var humidityEl = document.createElement("p");
-
+  var windEl = document.createElement("p");
+  
   col.append(card);
   card.append(cardBody);
-  cardBody.append(cardTitle, weatherIcon, tempEl, windEl, humidityEl);
-
+  cardBody.append(cardTitle, weatherIcon, tempEl, humidityEl, windEl);
   col.setAttribute("class", "col-md");
   col.classList.add("five-day-card");
   card.setAttribute("class", "card bg-primary h-100 text-white");
   cardBody.setAttribute("class", "card-body p-2");
   cardTitle.setAttribute("class", "card-title");
   tempEl.setAttribute("class", "card-text");
-  windEl.setAttribute("class", "card-text");
   humidityEl.setAttribute("class", "card-text");
-
+  windEl.setAttribute("class", "card-text");
   cardTitle.textContent = dayjs(forecast.dt_txt).format("M/D/YYYY");
   weatherIcon.setAttribute("src", iconUrl);
   weatherIcon.setAttribute("alt", iconDescription);
   tempEl.textContent = `Temp: ${tempF} °F`;
-  windEl.textContent = `Wind: ${windMph} MPH`;
   humidityEl.textContent = `Humidity: ${humidity} %`;
-
+  windEl.textContent = `Wind: ${windMph} MPH`;
   forecastContainer.append(col);
 }
 // The 5 day forecast with timestamps.
-
+// Filters and returns data captured at noon for each day.
+// Returns data between one day after the current data, to 5 days later.
 function renderForecast(dailyForecast) {
   var startDt = dayjs().add(1, "day").startOf("day").unix();
   var endDt = dayjs().add(6, "day").startOf("day").unix();
@@ -130,9 +123,7 @@ function renderForecast(dailyForecast) {
   forecastContainer.innerHTML = "";
   forecastContainer.append(headingCol);
   for (var i = 0; i < dailyForecast.length; i++) {
-    // Returns data between one day after the current data, to 5 days later.
     if (dailyForecast[i].dt >= startDt && dailyForecast[i].dt < endDt) {
-      // Filters and returns data captured at noon for each day.
       if (dailyForecast[i].dt_txt.slice(11, 13) == "12") {
         renderForecastCard(dailyForecast[i]);
       }
@@ -142,7 +133,6 @@ function renderForecast(dailyForecast) {
 
 var handleFormSubmit = function (event) {
   event.preventDefault();
-
   var nameInput = nameInputEl.val();
   var commentInput = commentInputEl.val();
   // if (!nameInput || !commentInput) {
@@ -150,7 +140,6 @@ var handleFormSubmit = function (event) {
   //   return;
   // }
   fetchCoords(nameInput);
-
   printQueryData(nameInput, commentInput);
   // reset form
   nameInputEl.val("");
@@ -171,7 +160,6 @@ function fetchWeather(location) {
   var { lat } = location;
   var { lon } = location;
   var city = location.name;
-
   var apiUrl = `${weatherApiRootUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
   //   var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=3fade8c75faf1243c424955cb9eafdfa`;
   fetch(apiUrl)
@@ -180,9 +168,6 @@ function fetchWeather(location) {
     })
     .then(function (data) {
       renderItems(city, data);
-    })
-    .catch(function (err) {
-      console.error(err);
     });
 }
 
@@ -195,21 +180,17 @@ function fetchCoords(search) {
     })
     .then(function (data) {
       if (!data[0]) {
-        alert("Location not found");
+        alert("Location does not exist");
       } else {
         appendToHistory(search);
         fetchWeather(data[0]);
       }
-    })
-    .catch(function (err) {
-      console.error(err);
     });
 }
 
 // document.getElementById("stock").addEventListener("click", function(){
 //   document.getElementById("myInput").value = this.value;
 // });
-
 // blank search form verify or no search
 function handleSearchFormSubmit(e) {
   if (!searchInput.value) {
@@ -220,7 +201,6 @@ function handleSearchFormSubmit(e) {
   fetchCoords(search);
   searchInput.value = "";
 }
-
 // search history button verify
 function handleSearchHistoryClick(e) {
   if (!e.target.matches(".btn-history")) {
@@ -230,7 +210,6 @@ function handleSearchHistoryClick(e) {
   var search = btn.getAttribute("data-search");
   fetchCoords(search);
 }
-
 // Function to display the search history list.
 // Start at end of history array and count down to show the most recent at the top.
 // `data-search` allows access to city name with click handler
@@ -246,7 +225,6 @@ function renderSearchHistory() {
     searchHistoryContainer.append(btn);
   }
 }
-
 // Update search history in local storage
 function appendToHistory(search) {
   if (searchHistory.indexOf(search) !== -1) {
@@ -256,7 +234,6 @@ function appendToHistory(search) {
   localStorage.setItem("search-history", JSON.stringify(searchHistory));
   renderSearchHistory();
 }
-
 // Get search history from local storage.
 function initSearchHistory() {
   var storedHistory = localStorage.getItem("search-history");
@@ -265,7 +242,6 @@ function initSearchHistory() {
   }
   renderSearchHistory();
 }
-
 initSearchHistory();
 searchForm.addEventListener("submit", handleSearchFormSubmit);
 searchHistoryContainer.addEventListener("click", handleSearchHistoryClick);
